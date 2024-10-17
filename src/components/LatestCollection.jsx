@@ -30,7 +30,7 @@ export const LatestCollection = () => {
                     <ProductItem key={index}
                     id={item._id}
                     image={item.image}
-                    name={item.namw}
+                    name={item.name}
                     price={item.price}
                      />
                 ))
