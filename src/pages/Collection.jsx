@@ -13,7 +13,7 @@ const Collection = () => {
   const [filterProducts, setFilterProducts] = useState([]);
 
   const [category, setCategory] = useState([]);
-  const [subCategory, serSubCategory] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
 
   const toggleCategory = (e) => {
 
@@ -27,8 +27,12 @@ const Collection = () => {
   }
 
   const toggleSubCategory = (e) => {
+
     if(subCategory.includes(e.target.value)) {
       setSubCategory(prev=> prev.filter(item=> item!==e.target.value))
+    }
+    else{
+      setSubCategory(prev => [...prev, e.target.value])
     }
   }
 
@@ -36,9 +40,9 @@ const Collection = () => {
     setFilterProducts(products);
   },[])
 
-/*   useEffect(()=>{
-    console.log(category);
-  },[category]) */
+  /* useEffect(()=>{
+    console.log(subCategory);
+  },[subCategory]) */
 
   const applyFilter = () => {
     let productsCopy = products.slice();
@@ -46,11 +50,19 @@ const Collection = () => {
     if(category.length > 0) {
       productsCopy = productsCopy.filter(item => category.includes(item.category));
     }
+
+    if(subCategory.length > 0){
+      productsCopy = productsCopy.filter(item => subCategory.includes(item.subCategory));
+    }
+
     setFilterProducts(productsCopy)
   }
-  useEffect(() => {
+
+ /*  useEffect(() => {
     setFilterProducts(products);
-  },[])
+  },[]) */
+
+  
   useEffect(() =>{
     applyFilter();
   },[category,subCategory])
